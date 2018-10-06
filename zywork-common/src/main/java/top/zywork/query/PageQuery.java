@@ -10,22 +10,25 @@ package top.zywork.query;
 public class PageQuery extends BaseQuery {
 
     private static final long serialVersionUID = 2691743450470042585L;
+
+    private static final int DEFAULT_PAGE_SIZE = 10;
+
     // 第几页
     private Integer pageNo;
     // 每页多少项
     private Integer pageSize;
     // 排序字段
-    private String sort;
+    private String sortColumn;
     // 排序规则
-    private String order;
+    private String sortOrder;
 
     public PageQuery(){}
 
-    public PageQuery(Integer pageNo, Integer pageSize, String sort, String order) {
+    public PageQuery(Integer pageNo, Integer pageSize, String sortColumn, String sortOrder) {
         this.pageNo = pageNo;
         this.pageSize = pageSize;
-        this.sort = sort;
-        this.order = order;
+        this.sortColumn = sortColumn;
+        this.sortOrder = sortOrder;
     }
 
     public Integer getPageNo() {
@@ -33,7 +36,7 @@ public class PageQuery extends BaseQuery {
     }
 
     public void setPageNo(Integer pageNo) {
-        this.pageNo = pageNo;
+        this.pageNo = pageNo > 0 ? pageNo : 1;
     }
 
     public Integer getPageSize() {
@@ -41,26 +44,26 @@ public class PageQuery extends BaseQuery {
     }
 
     public void setPageSize(Integer pageSize) {
-        this.pageSize = pageSize;
+        this.pageSize = pageSize > 0 ? pageSize : DEFAULT_PAGE_SIZE;
     }
 
     public int getBeginIndex() {
         return (pageNo - 1) * pageSize;
     }
 
-    public String getSort() {
-        return sort;
+    public String getSortColumn() {
+        return sortColumn;
     }
 
-    public void setSort(String sort) {
-        this.sort = sort;
+    public void setSortColumn(String sortColumn) {
+        this.sortColumn = sortColumn;
     }
 
-    public String getOrder() {
-        return order;
+    public String getSortOrder() {
+        return sortOrder;
     }
 
-    public void setOrder(String order) {
-        this.order = order;
+    public void setSortOrder(String sortOrder) {
+        this.sortOrder = sortOrder;
     }
 }

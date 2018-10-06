@@ -20,11 +20,4 @@ import java.util.Date;
 @ControllerAdvice
 public class BaseController {
 
-    @InitBinder
-    public void initBinder(WebDataBinder binder) {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        dateFormat.setLenient(false);
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-    }
-
 }

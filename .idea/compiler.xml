@@ -7,11 +7,14 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="zywork-common" />
+        <module name="zywork-generator" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="zywork-app" target="1.8" />
       <module name="zywork-common" target="1.8" />
+      <module name="zywork-generator" target="1.8" />
+      <module name="zywork-upms" target="1.8" />
       <module name="zyworktest" target="1.8" />
     </bytecodeTargetLevel>
   </component>

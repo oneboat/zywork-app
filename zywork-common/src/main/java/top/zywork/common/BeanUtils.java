@@ -79,4 +79,18 @@ public class BeanUtils {
         return targetList;
     }
 
+    /**
+     * 把集合中指定的源对象拷贝到另外一个集合中的目标对象，注意：这不是一个简单的集合的拷贝，而是集合内部的对象的重新拷贝
+     * @param source 源对象列表
+     * @param targetClass 目标对象类
+     * @return
+     */
+    public static <E> List<Object> copyListObj(List<E> source, Class<?> targetClass) {
+        List<Object> targetList = new ArrayList<>();
+        for (Object object : source) {
+            targetList.add(copy(object, targetClass));
+        }
+        return targetList;
+    }
+
 }

@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/zywork-app.iml" filepath="$PROJECT_DIR$/zywork-app.iml" />
       <module fileurl="file://$PROJECT_DIR$/zywork-common/zywork-common.iml" filepath="$PROJECT_DIR$/zywork-common/zywork-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zywork-generator/zywork-generator.iml" filepath="$PROJECT_DIR$/zywork-generator/zywork-generator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zywork-generator-ui/zywork-generator-ui.iml" filepath="$PROJECT_DIR$/zywork-generator-ui/zywork-generator-ui.iml" />
     </modules>
   </component>
 </project>

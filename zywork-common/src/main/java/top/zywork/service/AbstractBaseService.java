@@ -4,7 +4,6 @@ import top.zywork.common.BeanUtils;
 import top.zywork.common.ExceptionUtils;
 import top.zywork.dao.BaseDAO;
 import top.zywork.dto.PagerDTO;
-import top.zywork.query.PageQuery;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -109,31 +108,13 @@ public abstract class AbstractBaseService implements BaseService {
     }
 
     @Override
-    public PagerDTO listPage(PageQuery pageQuery) {
-        PagerDTO pagerDTO = new PagerDTO(pageQuery.getPageNo(), pageQuery.getPageSize());
-        try {
-            Long count = baseDAO.count();
-            pagerDTO.setTotal(count);
-            if (count > 0) {
-                List<Object> doObjList = baseDAO.listPage(pageQuery);
-                pagerDTO.setRows(BeanUtils.copyList(doObjList, dtoClass));
-            } else {
-                pagerDTO.setRows(new ArrayList<>());
-            }
-            return pagerDTO;
-        } catch (RuntimeException e) {
-            throw ExceptionUtils.serviceException(e);
-        }
-    }
-
-    @Override
-    public PagerDTO listPageByCondition(PageQuery pageQuery, Object queryObj) {
-        PagerDTO pagerDTO = new PagerDTO(pageQuery.getPageNo(), pageQuery.getPageSize());
+    public PagerDTO listPageByCondition(Object queryObj) {
+        PagerDTO pagerDTO = new PagerDTO();
         try {
             Long count = baseDAO.countByCondition(queryObj);
             pagerDTO.setTotal(count);
             if (count > 0) {
-                List<Object> doObjList = baseDAO.listPageByCondition(pageQuery, queryObj);
+                List<Object> doObjList = baseDAO.listPageByCondition(queryObj);
                 pagerDTO.setRows(BeanUtils.copyList(doObjList, dtoClass));
             } else {
                 pagerDTO.setRows(new ArrayList<>());

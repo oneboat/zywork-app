@@ -66,9 +66,17 @@ public class StringUtils {
      * @return 长整型数字数组
      */
     public static Long[] strToLongArray(String str, String separator) {
-        String[] strArray = str.split(separator);
+        return strArrayToLongArray(str.split(separator));
+    }
+
+    /**
+     * 把字符器中数组转化成对应的长整型数组
+     * @param strArray 字符串数组
+     * @return 长整型数组
+     */
+    public static Long[] strArrayToLongArray(String[] strArray) {
         Long[] longArray = new Long[strArray.length];
-        for (int i = 0, len = strArray.length; i < len; i++) {
+        for (int i = 0, len = longArray.length; i < len; i++) {
             longArray[i] = Long.valueOf(strArray[i]);
         }
         return longArray;

@@ -66,25 +66,11 @@ public interface BaseDAO {
     List<Object> listAll();
 
     /**
-     * 根据PageQuery分页查询对象分页查找记录数据
-     * @param pageQuery 分页查询对象
-     * @return 分页数据DO对象所组成的List列表
-     */
-    List<Object> listPage(PageQuery pageQuery);
-
-    /**
-     * 返回记录数
-     * @return 记录数
-     */
-    Long count();
-
-    /**
      * 根据分页查询对象和条件查询对象查找数据
-     * @param pageQuery 分页查询对象
-     * @param queryObj 条件查询对象
+     * @param queryObj 条件查询对象，包括分页数据
      * @return 按照条件的分页数据DO对象所组成的List列表
      */
-    List<Object> listPageByCondition(PageQuery pageQuery, Object queryObj);
+    List<Object> listPageByCondition(Object queryObj);
 
     /**
      * 根据条件查询对象计数

@@ -11,32 +11,14 @@ import java.util.List;
  */
 public class PagerDTO {
 
-    private Integer pageNo;
-    private Integer pageSize;
     private Long total;
     private List<Object> rows;
 
     public PagerDTO() {}
 
-    public PagerDTO(Integer pageNo, Integer pageSize) {
-        this.pageNo = pageNo;
-        this.pageSize = pageSize;
-    }
-
-    public Integer getPageNo() {
-        return pageNo;
-    }
-
-    public void setPageNo(Integer pageNo) {
-        this.pageNo = pageNo;
-    }
-
-    public Integer getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(Integer pageSize) {
-        this.pageSize = pageSize;
+    public PagerDTO(Long total, List<Object> rows) {
+        this.total = total;
+        this.rows = rows;
     }
 
     public Long getTotal() {
@@ -55,20 +37,10 @@ public class PagerDTO {
         this.rows = rows;
     }
 
-    public int getBeginIndex() {
-        return (pageNo - 1) * pageSize;
-    }
-
-    public Long getTotalPage() {
-        return total % pageSize == 0 ? total / pageSize : total / pageSize + 1;
-    }
-
     @Override
     public String toString() {
         return "PagerDTO{" +
-                "pageNo=" + pageNo +
-                ", pageSize=" + pageSize +
-                ", total=" + total +
+                "total=" + total +
                 ", rows=" + rows +
                 '}';
     }

@@ -66,6 +66,8 @@
         <quartz.version>2.3.0</quartz.version>
         <commons-lang3.version>3.7</commons-lang3.version>
         <!-- zywork-common模块引用的jar包 -->
+        <commons-io.version>2.6</commons-io.version>
+        <mysql.version>5.1.46</mysql.version>
         <junit.version>4.12</junit.version>
     </properties>
 

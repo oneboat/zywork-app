@@ -27,9 +27,9 @@ public class BindingResultUtils {
             errorString.append(fieldError.getField())
                     .append(": ")
                     .append(fieldError.getDefaultMessage())
-                    .append("\n");
+                    .append(";");
         }
-        return errorString.toString();
+        return errorString.toString().substring(0, errorString.length() - 1);
     }
 
 }
