@@ -48,7 +48,7 @@
         <Button type="primary" size="large" @click="add">确定</Button>
       </div>
     </Modal>
-    <Modal v-model="modal.edit" title="修改" @on-visible-change="changeModalVisibleResetForm('form', $event)">
+    <Modal v-model="modal.edit" title="修改" @on-visible-change="changeModalVisibleResetForm('editForm', $event)">
       <Form ref="editForm" :model="form" :label-width="80" :rules="validateRules">
         <FormItem label="姓名" prop="name">
           <Input v-model="form.name"/>

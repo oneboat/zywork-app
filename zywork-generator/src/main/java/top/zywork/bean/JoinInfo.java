@@ -14,6 +14,7 @@ public class JoinInfo {
     private String primaryTable;
     private String whereClause;
     private String[] columns;
+    private String[] codeTypes;
 
     public String getBeanName() {
         return beanName;
@@ -53,5 +54,13 @@ public class JoinInfo {
 
     public void setColumns(String[] columns) {
         this.columns = columns;
+    }
+
+    public String[] getCodeTypes() {
+        return codeTypes;
+    }
+
+    public void setCodeTypes(String[] codeTypes) {
+        this.codeTypes = codeTypes;
     }
 }

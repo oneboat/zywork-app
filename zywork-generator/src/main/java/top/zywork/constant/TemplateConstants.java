@@ -10,9 +10,6 @@ package top.zywork.constant;
  */
 public class TemplateConstants {
 
-    public static final Integer TOTAL_TEMPLATES = 10;
-    public static final Integer TOTAL_JOIN_TEMPLATES = 10;
-
     public static final String TEMPLATE_FILE_DIR = "classpath:/template/";
 
     public static final String DO_TEMPLATE = "do.tpl";

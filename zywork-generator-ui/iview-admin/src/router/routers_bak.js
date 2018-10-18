@@ -43,7 +43,6 @@ export default [
       }
     ]
   },
-  /**
   {
     path: '',
     name: 'doc',
@@ -69,7 +68,6 @@ export default [
       }
     ]
   },
-   */
   {
     path: '/generator',
     name: 'generator',
@@ -156,7 +154,6 @@ export default [
       }
     ]
   },
-  /**
   {
     path: '/components',
     name: 'components',
@@ -408,7 +405,6 @@ export default [
       }
     ]
   },
-   */
   {
     path: '/401',
     name: 'error_401',

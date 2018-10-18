@@ -1,0 +1,136 @@
+iview-admin的相关整理
+
+1、登录页面：
+    src/view/login
+    引用src/components/login-form，点击登录按钮后，触发on-success-valid事件
+    on-success-valid事件在src/view/login中执行事件响应handleSubmit函数
+    handleSubmit函数调用src/store/module/user.js中的handleLogin和getUserInfo函数
+    src/store/module/user.js中的handleLogin函数调用src/api/user.js中的login函数，登录成功把token保存到store中，并进入到home页面
+    src/store/module/user.js中的getUserInfo函数调用src/api/user.js中的getUserInfo函数
+
+2、Mock数据
+    登录或表格等的数据来源，为了方便前端开发人员，使用了Mock数据
+    src/mock/index.js中定义了哪些url使用mock数据
+    如src/mock/index.js中的代码：
+    import Mock from 'mockjs'
+    import { login, logout, getUserInfo } from './login'
+    import { getTableData, getDragList } from './data'
+
+    // 登录相关和获取用户信息
+    Mock.mock(/\/login/, login)
+    Mock.mock(/\/get_info/, getUserInfo)
+    Mock.mock(/\/logout/, logout)
+    Mock.mock(/\/get_table_data/, getTableData)
+    Mock.mock(/\/get_drag_list/, getDragList)
+
+    export default Mock
+
+3、左侧菜单与路由
+    左侧菜单都配置在路由文件src/router/routers.js中
+    包含三种模式：
+    1、独立模式，与主页无关，不出现在左侧菜单，如/login的配置
+    2、独立模式，与主页无关，出现在左侧菜单，如doc的配置
+    3、与主页相关，会添加tag，两面在左侧菜单，并有子菜单，如/generator的配置
+
+    任何一个视图页面都需要添加router配置
+
+4、路由传参
+    两种方案，一种方案是QueryString，一种方案的Restful
+    1、Restful形式如下：
+    {
+        path: '/user1',
+        name: 'user1',
+        meta: {
+          hideInMenu: true
+        },
+        component: Main,
+        children: [
+          {
+            path: 'user-page1/:id',
+            name: 'user-page1',
+            meta: {
+              title: '用户管理1',
+              notCache: true
+            },
+            component: () => import('@/view/admin/user/user1.vue')
+          }
+        ]
+      }
+
+    showPage() {
+            let route = {
+              name: "user-page1",
+              params: {
+                id: 1
+              }
+            }
+            this.$router.push(route)
+          }
+
+    另一个页面获取参数：
+    mounted() {
+          console.log(this.$route.params.id)
+          this.search()
+        }
+
+    2、QueryString形式如下：
+    {
+            path: '/user1',
+            name: 'user1',
+            meta: {
+              hideInMenu: true
+            },
+            component: Main,
+            children: [
+              {
+                path: 'user-page1',
+                name: 'user-page1',
+                meta: {
+                  title: '用户管理1',
+                  notCache: true
+                },
+                component: () => import('@/view/admin/user/user1.vue')
+              }
+            ]
+          }
+
+        showPage() {
+                let route = {
+                  path: "user-page1",
+                  query: {
+                    id: 1
+                  }
+                }
+                this.$router.push(route)
+              }
+
+        另一个页面获取参数：
+        mounted() {
+              console.log(this.$route.query.id)
+              this.search()
+            }
+
+5、Tag的添加并路由传参
+    src/view/main/components/tags-nav中定义了Tags标签来显示页面，路由传参与第4点一致
+    import { mapMutations } from 'vuex'
+    methods: {
+          ...mapMutations([
+            'addTag'
+          ]),
+          showPage() {
+                  let route = {
+                    name: 'user-page1',
+                    params: {
+                      id: 1
+                    },
+                    meta: {
+                      title: '用户管理1'
+                    }
+                  }
+                  this.addTag({
+                    route: route,
+                    type: 'push'
+                  })
+                  this.$router.push(route)
+                },
+

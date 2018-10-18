@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import top.zywork.bean.Generator;
 import top.zywork.bean.JoinInfo;
+import top.zywork.bean.SingleInfo;
 import top.zywork.bean.TableColumn;
 import top.zywork.common.FileUtils;
 import top.zywork.constant.TemplateConstants;
@@ -31,24 +32,24 @@ public class GeneratorController {
 
     /**
      * 生成选中的单表的数据，可支持同时选中多个单表
-     * @param tableNames
+     * @param singleInfo
      * @param request
      * @return
      */
     @PostMapping("codes")
-    public ResponseStatusVO generateCodes(@RequestBody String[] tableNames, HttpServletRequest request) {
+    public ResponseStatusVO generateCodes(@RequestBody SingleInfo singleInfo, HttpServletRequest request) {
         ServletContext servletContext = request.getServletContext();
         Generator generator = (Generator) servletContext.getAttribute("generator");
         List<TableColumn> tableColumnList = (List<TableColumn>) servletContext.getAttribute("tableColumnList");
-        for (String tableName : tableNames) {
+        for (String tableName : singleInfo.getTables()) {
             for (TableColumn tableColumn : tableColumnList) {
                 if (tableName.equals(tableColumn.getTableName())) {
-                    CodeGenerator.generateCode(generator, tableColumn);
+                    CodeGenerator.generateCode(generator, tableColumn, singleInfo.getCodeTypes());
                 }
             }
         }
         ResponseStatusVO statusVO = new ResponseStatusVO();
-        statusVO.okStatus(200, "成功生成所选表的代码！共生成" + tableNames.length * TemplateConstants.TOTAL_TEMPLATES + "个文件", null);
+        statusVO.okStatus(200, "成功生成所选表的代码！", null);
         return statusVO;
     }
 
@@ -64,8 +65,8 @@ public class GeneratorController {
             statusVO.errorStatus(500, "已经存在指定名称的实体类，请重新填写实体类名称后再生成代码", null);
         } else {
             List<TableColumn> tableColumnList = (List<TableColumn>) servletContext.getAttribute("tableColumnList");
-            CodeGenerator.generateJoinCode(joinInfo.getBeanName(), joinInfo.getRequestMapping(), generator, joinInfo.getPrimaryTable(), joinInfo.getColumns(), tableColumnList, joinInfo.getWhereClause());
-            statusVO.okStatus(200, "成功生成所选关联表的代码！共生成" + TemplateConstants.TOTAL_JOIN_TEMPLATES + "个文件", null);
+            CodeGenerator.generateJoinCode(joinInfo.getBeanName(), joinInfo.getRequestMapping(), generator, joinInfo.getPrimaryTable(), joinInfo.getColumns(), tableColumnList, joinInfo.getWhereClause(), joinInfo.getCodeTypes());
+            statusVO.okStatus(200, "成功生成所选关联表的代码！", null);
         }
         return statusVO;
     }
