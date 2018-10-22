@@ -122,7 +122,7 @@ public class {zywork.beanName}{zywork.suffix} extends BaseController {
             statusVO.dataErrorStatus(500, BindingResultUtils.errorString(bindingResult), null);
         } else {
             try {
-                userService.updateBatch(BeanUtils.copyListObj({zywork.beanNameLowerCase}{zywork.voSuffix}List, {zywork.beanName}{zywork.dtoSuffix}.class));
+                {zywork.beanNameLowerCase}{zywork.serviceSuffix}.updateBatch(BeanUtils.copyListObj({zywork.beanNameLowerCase}{zywork.voSuffix}List, {zywork.beanName}{zywork.dtoSuffix}.class));
                 statusVO.okStatus(200, "批量更新成功", null);
             } catch (ServiceException e) {
                 logger.error("更新失败：{}", e.getMessage());
