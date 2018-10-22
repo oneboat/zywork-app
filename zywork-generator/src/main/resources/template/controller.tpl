@@ -62,7 +62,7 @@ public class {zywork.beanName}{zywork.suffix} extends BaseController {
             statusVO.dataErrorStatus(500, BindingResultUtils.errorString(bindingResult), null);
         } else {
             try {
-                userService.saveBatch(BeanUtils.copyListObj({zywork.beanNameLowerCase}{zywork.voSuffix}List, {zywork.beanName}{zywork.dtoSuffix}.class));
+                {zywork.beanNameLowerCase}{zywork.serviceSuffix}.saveBatch(BeanUtils.copyListObj({zywork.beanNameLowerCase}{zywork.voSuffix}List, {zywork.beanName}{zywork.dtoSuffix}.class));
                 statusVO.okStatus(200, "批量添加成功", null);
             } catch (ServiceException e) {
                 logger.error("添加失败：{}", e.getMessage());
